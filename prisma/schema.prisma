@@ -11,7 +11,8 @@ model Users {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
-  titlesCreated Titles[]
+  name String
+  imageUrl String
 }
 
 model Friends{
@@ -37,10 +38,8 @@ model Titles {
   authorId Int
   descriptio String
   createdAt DateTime @default(now())
-  numberOfUsersWhoAccessed Int
-  createdByUser Users @relation(fields: [createdByUserId], references: [id])
-  createdByUserId Int
 }
 
 model Publishers{}
 model Authors{}
+model AccessingsToTitles{}
