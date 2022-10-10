@@ -13,6 +13,8 @@ model Users {
   password String
   name String
   imageUrl String
+  friends Friends[]
+  friends Requests[]
 }
 
 model Friends{
