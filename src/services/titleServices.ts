@@ -48,3 +48,9 @@ export async function gettingSearch(word:string) {
 
     return titles;
 }
+export async function gettingById(id:number) {
+
+    const title = await titleRepository.gettingById(id);
+
+    return title;
+}

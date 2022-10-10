@@ -18,3 +18,9 @@ export async function gettingSearch(req:Request,res:Response){
     const users = await authService.gettingSearch(req.params.word);
     res.send(users);
 }
+
+export async function gettingById(req:Request,res:Response){
+    
+    const user = await authService.gettingById(Number(req.params.id));
+    res.send(user);
+}

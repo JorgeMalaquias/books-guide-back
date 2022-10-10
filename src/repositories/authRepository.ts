@@ -41,3 +41,12 @@ export async function gettingSearch(word:string) {
     });
     return user;
 }
+
+export async function gettingById(id:number) {
+    const user = await prisma.users.findFirst({
+        where:{
+            id
+        }
+    });
+    return user;
+}

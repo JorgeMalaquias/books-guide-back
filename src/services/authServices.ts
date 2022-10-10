@@ -56,3 +56,10 @@ export async function gettingSearch(word:string) {
 
     return auths;
 }
+
+export async function gettingById(id:number) {
+
+    const title = await authRepository.gettingById(id);
+
+    return title;
+}

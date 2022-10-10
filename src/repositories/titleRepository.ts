@@ -52,3 +52,11 @@ export async function gettingSearch(word:string) {
     });
     return title;
 }
+export async function gettingById(id:number) {
+    const title = await prisma.titles.findFirst({
+        where:{
+            id
+        }
+    });
+    return title;
+}

@@ -24,3 +24,8 @@ export async function gettingSearch(req:Request,res:Response){
     const titles = await titleService.gettingSearch(req.params.word);
     res.send(titles);
 }
+export async function gettingById(req:Request,res:Response){
+    
+    const title = await titleService.gettingById(Number(req.params.id));
+    res.send(title);
+}

@@ -16,3 +16,4 @@ export async function gettingTotal() {
 
     return total;
 }
+
