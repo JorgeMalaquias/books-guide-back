@@ -4,6 +4,7 @@ import titleRoutes from "./titleRoutes";
 import { testsRouter } from "./testsRouter";
 import dotenv from 'dotenv';
 import authorRoutes from "./authorRoutes";
+import collectionRoutes from "./collectionRoutes";
 dotenv.config();
 
 const routes = Router();
@@ -11,6 +12,7 @@ const routes = Router();
 routes.use(authRoutes);
 routes.use(titleRoutes);
 routes.use(authorRoutes);
+routes.use(collectionRoutes);
 if (process.env.NODE_ENV === "test") {
 	routes.use(testsRouter);
 }
