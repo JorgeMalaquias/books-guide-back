@@ -1,4 +1,4 @@
-import * as usersRepository from "../repositories/usersRepository";
+import * as authRepository from "../repositories/authRepository";
 import { IUser } from "../types/userTypes";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -6,14 +6,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 
-export async function registering({email,password}:IUser){
+export async function registering({email,password,name, imageUrl}:IUser){
     await verifyingEmail(email);
-    const newUser  = await usersRepository.registering(email,cripting(password));
+    const newUser  = await authRepository.registering(email,cripting(password),name, imageUrl);
     return newUser;
 }
 
 export async function logging({email,password}:IUser){
-    const user  = await usersRepository.gettingUserByEmail(email);
+    const user  = await authRepository.gettingUserByEmail(email);
     if(user){
         checkingPassword(password,user.password);
         return generatingToken(user.id.toString());
@@ -26,7 +26,7 @@ export async function logging({email,password}:IUser){
 
 
 async function verifyingEmail(email:string){
-    const user = await usersRepository.gettingUserByEmail(email);
+    const user = await authRepository.gettingUserByEmail(email);
     if(user!==null){
         throw ({ type: 'conflict', message: 'This email is already been used' });
     }

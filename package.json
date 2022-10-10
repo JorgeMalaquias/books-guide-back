@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/server.ts",
+    "prisma:reset": "prisma migrate reset",
+    "prisma:migrate": "prisma migrate dev",
+    "test:unit": "jest -- -i --coverage --testPathPattern=tests/unit",
+    "test": "jest --no-cache"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +38,7 @@
     "@types/pg": "^8.6.5",
     "@types/supertest": "^2.0.12",
     "jest": "^29.0.3",
+    "nodemon": "^2.0.20",
     "prisma": "^4.0.0",
     "supertest": "^6.2.4",
     "ts-jest": "^29.0.1",
