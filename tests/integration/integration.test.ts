@@ -5,6 +5,10 @@ import { faker } from '@faker-js/faker';
 
 beforeEach(async () => {
   await prisma.$executeRaw`TRUNCATE TABLE "Users" CASCADE;`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Titles" CASCADE;`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Publishers" CASCADE;`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Authors" CASCADE;`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Titles" CASCADE;`;
 });
 
 
@@ -124,3 +128,53 @@ describe('Test POST /login', () => {
   });
 });
 
+describe('Test POST /titles', () => {
+  it('Testing the case of success in creatinga new title', async () => {
+    const bodyRegister = {
+      email: 'jojo@email.com',
+      password: 'xablau',
+      confirmPassword: 'xablau',
+      name: 'jojo',
+      imageUrl: 'https://xablau'
+    }
+    const bodyLogin = {
+      email: 'jojo@email.com',
+      password: 'xablau'
+    }
+    await supertest(app).post(`/register`).send(bodyRegister);
+    const logging = await supertest(app).post(`/login`).send(bodyLogin);
+    const body = {
+      name:'Naruto vol. 1',
+      imageUrl: 'https://narutin',
+      author: 'Masashi Kishimoto',
+      publisher: 'Shueisha',
+      description: 'Eu vou ser hokage dattebayo!'
+    }
+    const result = await supertest(app).post(`/titles`).send(body).set({authorization: 'Bearer ' + logging.body.token});
+    expect(result.status).toBe(201);
+  });
+  it('Testing the case of success in creatinga new title', async () => {
+    const bodyRegister = {
+      email: 'jojo@email.com',
+      password: 'xablau',
+      confirmPassword: 'xablau',
+      name: 'jojo',
+      imageUrl: 'https://xablau'
+    }
+    const bodyLogin = {
+      email: 'jojo@email.com',
+      password: 'xablau'
+    }
+    await supertest(app).post(`/register`).send(bodyRegister);
+    const logging = await supertest(app).post(`/login`).send(bodyLogin);
+    const body = {
+      name:'Naruto vol. 1',
+      imageUrl: 'https://narutin',
+      author: 'Masashi Kishimoto',
+      publisher: 'Shueisha',
+      description: 'Eu vou ser hokage dattebayo!'
+    }
+    const result = await supertest(app).post(`/titles`);
+    expect(result.status).toBe(401);
+  });
+})
