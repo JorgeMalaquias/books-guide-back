@@ -1,19 +1,19 @@
 import prisma from "../database/database";
 
 export async function gettingByName(name:string){
-    const author = await prisma.authors.findFirst({
+    const publisher = await prisma.publishers.findFirst({
         where: {
             name
         }
     });
-    return author;
+    return publisher;
 }
 
 export async function creating(name:string){
-    const author = await prisma.authors.create({
+    const publisher = await prisma.publishers.create({
         data: {
             name
         }
     });
-    return author;
+    return publisher;
 }

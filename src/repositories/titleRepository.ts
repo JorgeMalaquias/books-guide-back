@@ -13,3 +13,15 @@ export async function creating(name:string, imageUrl:string, authorId:number,pub
     });
     return title;
 }
+export async function getting(name:string, imageUrl:string, authorId:number,publisherId:number,description:string){
+    const title = await prisma.titles.findFirst({
+        where: {
+            name,
+            imageUrl,
+            authorId,
+            publisherId,
+            description
+        }
+    });
+    return title;
+}

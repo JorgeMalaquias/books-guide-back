@@ -25,7 +25,7 @@ describe('Test POST /register', () => {
     }
     const result = await supertest(app).post(`/register`).send(body);
     expect(result.status).toBe(201);
-    expect(result.body).toMatchObject({ email: body.email, password: result.body.password,name: body.name,imageUrl: body.imageUrl });
+    expect(result.body).toMatchObject({ email: body.email, password: result.body.password, name: body.name, imageUrl: body.imageUrl });
   });
 
   it('Should return status 422 when the body of the request is invalid (invalid email)', async () => {
@@ -48,23 +48,23 @@ describe('Test POST /register', () => {
   });
   it('Should return status 400 when the passwords of the body are not the same', async () => {
     const body = {
-        email: 'jojo@email.com',
-        password: 'xablau',
-        confirmPassword: 'xab',
-        name: 'jojo',
-        imageUrl: 'https://xablau'
-      }
+      email: 'jojo@email.com',
+      password: 'xablau',
+      confirmPassword: 'xab',
+      name: 'jojo',
+      imageUrl: 'https://xablau'
+    }
     const result = await supertest(app).post(`/register`).send(body);
     expect(result.status).toBe(400);
   });
   it('Should return status 409 if the email sent by the body were already been used', async () => {
     const body = {
-        email: 'jojo@email.com',
-        password: 'xablau',
-        confirmPassword: 'xablau',
-        name: 'jojo',
-        imageUrl: 'https://xablau'
-      }
+      email: 'jojo@email.com',
+      password: 'xablau',
+      confirmPassword: 'xablau',
+      name: 'jojo',
+      imageUrl: 'https://xablau'
+    }
     await supertest(app).post(`/register`).send(body);
     const result = await supertest(app).post(`/register`).send(body);
     expect(result.status).toBe(409);
@@ -75,12 +75,12 @@ describe('Test POST /register', () => {
 describe('Test POST /login', () => {
   it('Should return status 200 and the new token generated when everything go well', async () => {
     const bodyRegister = {
-        email: 'jojo@email.com',
-        password: 'xablau',
-        confirmPassword: 'xablau',
-        name: 'jojo',
-        imageUrl: 'https://xablau'
-      }
+      email: 'jojo@email.com',
+      password: 'xablau',
+      confirmPassword: 'xablau',
+      name: 'jojo',
+      imageUrl: 'https://xablau'
+    }
     const body = {
       email: 'jojo@email.com',
       password: 'xablau'
@@ -100,20 +100,20 @@ describe('Test POST /login', () => {
   });
   it('Should return status 404 when the requested user does not exist', async () => {
     const body = {
-        email: 'jojo@email.com',
-        password: 'xablau'
-      }
+      email: 'jojo@email.com',
+      password: 'xablau'
+    }
     const result = await supertest(app).post(`/login`).send(body);
     expect(result.status).toBe(404);
   });
   it('Should return status 401 when the informed password is wrong', async () => {
     const bodyRegister = {
-        email: 'jojo@email.com',
-        password: 'xablau',
-        confirmPassword: 'xablau',
-        name: 'jojo',
-        imageUrl: 'https://xablau'
-      }
+      email: 'jojo@email.com',
+      password: 'xablau',
+      confirmPassword: 'xablau',
+      name: 'jojo',
+      imageUrl: 'https://xablau'
+    }
     const body = {
       email: 'jojo@email.com',
       password: 'xabla'
@@ -123,3 +123,4 @@ describe('Test POST /login', () => {
     expect(result.status).toBe(401);
   });
 });
+

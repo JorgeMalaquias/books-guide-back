@@ -57,12 +57,12 @@ model Titles {
 
 model Publishers{
   id       Int    @id @default(autoincrement())
-  name String
+  name String @unique
   titles Titles[]
 }
 model Authors{
   id       Int    @id @default(autoincrement())
-  name String
+  name String @unique
   titles Titles[]
 }
 model AccessingsToTitles{
