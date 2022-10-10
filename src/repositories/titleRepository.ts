@@ -1,7 +1,7 @@
 import prisma from "../database/database";
 import { ITitle } from "../types/titleTypes";
 
-export async function creating(name:string, imageUrl:string, authorId:number,publisherId:number,description:string){
+export async function creating(name: string, imageUrl: string, authorId: number, publisherId: number, description: string) {
     const title = await prisma.titles.create({
         data: {
             name,
@@ -13,7 +13,7 @@ export async function creating(name:string, imageUrl:string, authorId:number,pub
     });
     return title;
 }
-export async function getting(name:string, imageUrl:string, authorId:number,publisherId:number,description:string){
+export async function getting(name: string, imageUrl: string, authorId: number, publisherId: number, description: string) {
     const title = await prisma.titles.findFirst({
         where: {
             name,
@@ -23,5 +23,10 @@ export async function getting(name:string, imageUrl:string, authorId:number,publ
             description
         }
     });
+    return title;
+}
+
+export async function gettingTotal() {
+    const title = await prisma.$executeRaw`SELECT COUNT(*) as "totalTitles" FROM "Titles";`;
     return title;
 }

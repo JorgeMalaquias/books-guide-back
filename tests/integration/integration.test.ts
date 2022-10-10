@@ -177,4 +177,52 @@ describe('Test POST /titles', () => {
     const result = await supertest(app).post(`/titles`);
     expect(result.status).toBe(401);
   });
+  it('Testing the case of success in creatinga new title', async () => {
+    const bodyRegister = {
+      email: 'jojo@email.com',
+      password: 'xablau',
+      confirmPassword: 'xablau',
+      name: 'jojo',
+      imageUrl: 'https://xablau'
+    }
+    const bodyLogin = {
+      email: 'jojo@email.com',
+      password: 'xablau'
+    }
+    await supertest(app).post(`/register`).send(bodyRegister);
+    const logging = await supertest(app).post(`/login`).send(bodyLogin);
+    const body = {
+      name:'Naruto vol. 1',
+      imageUrl: 'https://narutin',
+      author: 'Masashi Kishimoto',
+      publisher: 'Shueisha',
+      description: 'Eu vou ser hokage dattebayo!'
+    }
+    await supertest(app).post(`/titles`).send(body).set({authorization: 'Bearer ' + logging.body.token});
+    const result = await supertest(app).post(`/titles`).send(body).set({authorization: 'Bearer ' + logging.body.token});
+    expect(result.status).toBe(409);
+  });
+  it('Testing the case of success in creatinga new title', async () => {
+    const bodyRegister = {
+      email: 'jojo@email.com',
+      password: 'xablau',
+      confirmPassword: 'xablau',
+      name: 'jojo',
+      imageUrl: 'https://xablau'
+    }
+    const bodyLogin = {
+      email: 'jojo@email.com',
+      password: 'xablau'
+    }
+    await supertest(app).post(`/register`).send(bodyRegister);
+    const logging = await supertest(app).post(`/login`).send(bodyLogin);
+    const body = {
+      name:'Naruto vol. 1',
+      imageUrl: 'https://narutin',
+      author: 'Masashi Kishimoto',
+      publisher: 'Shueisha',
+    }
+    const result = await supertest(app).post(`/titles`).send(body).set({authorization: 'Bearer ' + logging.body.token});
+    expect(result.status).toBe(422);
+  });
 })

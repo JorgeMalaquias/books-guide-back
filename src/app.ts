@@ -13,6 +13,7 @@ const app = express();
 app.use(json());
 app.use(cors());
 app.use(routes);
+
 app.use(errorHandlerMiddleware);
 
 export default app;

@@ -7,25 +7,31 @@ import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function creating({name, imageUrl, author,publisher,description}:ITitle){
+export async function creating({ name, imageUrl, author, publisher, description }: ITitle) {
 
     const publisherFound = await publisherService.gettingByName(publisher);
     const authorFound = await authorService.gettingByName(author);
 
-    const titleFound = await getting(name,imageUrl,authorFound.id,publisherFound.id,description);
+    const titleFound = await getting(name, imageUrl, authorFound.id, publisherFound.id, description);
 
-    if(titleFound!==null){
+    if (titleFound !== null) {
         throw ({ type: 'conflict', message: 'there is already a title with this name, the same publisher and author' });
     }
-    
-    
-    const newTitle  = await titleRepository.creating(name, imageUrl, authorFound.id,publisherFound.id,description);
+
+
+    const newTitle = await titleRepository.creating(name, imageUrl, authorFound.id, publisherFound.id, description);
     return newTitle;
 }
 
-export async function getting(name:string, imageUrl:string, authorId:number,publisherId:number,description:string){
-    
-    const titleFound = await titleRepository.getting(name,imageUrl,authorId,publisherId,description);
+export async function getting(name: string, imageUrl: string, authorId: number, publisherId: number, description: string) {
+
+    const titleFound = await titleRepository.getting(name, imageUrl, authorId, publisherId, description);
 
     return titleFound;
+}
+export async function gettingTotal() {
+
+    const total = await titleRepository.gettingTotal();
+
+    return total;
 }
