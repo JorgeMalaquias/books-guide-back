@@ -9,3 +9,10 @@ export async function gettingByName(name:string){
     }
     return author;
 }
+
+export async function gettingTotal() {
+
+    const total = await authorRepository.gettingTotal();
+
+    return total;
+}

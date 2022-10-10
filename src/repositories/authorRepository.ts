@@ -17,3 +17,8 @@ export async function creating(name:string){
     });
     return author;
 }
+
+export async function gettingTotal() {
+    const total = await prisma.$executeRaw`SELECT COUNT(*) as "totalAuthors" FROM "Authors";`;
+    return total;
+}
