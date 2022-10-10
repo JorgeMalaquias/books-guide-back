@@ -30,3 +30,14 @@ export async function registering(email:string,password:string,name:string, imag
     });
     return user;
 }
+
+export async function gettingSearch(word:string) {
+    const user = await prisma.users.findMany({
+        where:{
+            name:{
+                contains: word
+            }
+        }
+    });
+    return user;
+}

@@ -50,3 +50,9 @@ function generatingToken(info:string):string{
     }
     return token;
 }
+export async function gettingSearch(word:string) {
+
+    const auths = await authRepository.gettingSearch(word);
+
+    return auths;
+}

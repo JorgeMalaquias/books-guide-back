@@ -13,3 +13,8 @@ export async function logging(req:Request,res:Response){
     res.status(200).send({token});
     
 }
+export async function gettingSearch(req:Request,res:Response){
+    
+    const users = await authService.gettingSearch(req.params.word);
+    res.send(users);
+}
