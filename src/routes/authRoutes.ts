@@ -1,5 +1,5 @@
 import { Router } from "express";
-//import { logging, registering } from "../controllers/authControllers";
+import { logging, registering } from "../controllers/authControllers";
 import comparingPasswords from "../middlewares/comparingPassword";
 import { validateSchemaMiddleware } from "../middlewares/validateSchema";
 import { userRegisterSchema, userLoginSchema } from "../schemas/authSchemas";
