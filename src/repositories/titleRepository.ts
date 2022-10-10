@@ -27,6 +27,28 @@ export async function getting(name: string, imageUrl: string, authorId: number, 
 }
 
 export async function gettingTotal() {
-    const title = await prisma.$executeRaw`SELECT COUNT(*) as "totalTitles" FROM "Titles";`;
+    const total = await prisma.titles.aggregate({
+        _count: {
+            id:true
+        }
+    });
+    return total._count.id;
+}
+export async function gettingRecents() {
+    const title = await prisma.titles.findMany({
+        orderBy:{
+            createdAt: 'desc'
+        }
+    });
+    return title;
+}
+export async function gettingSearch(word:string) {
+    const title = await prisma.titles.findMany({
+        where:{
+            name:{
+                contains: word
+            }
+        }
+    });
     return title;
 }

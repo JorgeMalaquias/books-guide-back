@@ -12,3 +12,15 @@ export async function gettingTotal(req:Request,res:Response){
     const total = await titleService.gettingTotal();
     res.send({total});
 }
+
+export async function gettingRecents(req:Request,res:Response){
+    
+    const titles = await titleService.gettingRecents();
+    res.send(titles);
+}
+
+export async function gettingSearch(req:Request,res:Response){
+    
+    const titles = await titleService.gettingSearch(req.params.word);
+    res.send(titles);
+}

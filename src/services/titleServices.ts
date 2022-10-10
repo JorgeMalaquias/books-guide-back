@@ -35,3 +35,16 @@ export async function gettingTotal() {
 
     return total;
 }
+
+export async function gettingRecents() {
+
+    const titles = await titleRepository.gettingRecents();
+
+    return titles;
+}
+export async function gettingSearch(word:string) {
+
+    const titles = await titleRepository.gettingSearch(word);
+
+    return titles;
+}
